@@ -2,6 +2,8 @@ import serial
 import RPi.GPIO as GPIO
 import time
 
+from config import config_data
+
 cnf_dat = config_data()
 
 ser=serial.Serial(cnf_dat["serial_port"],9600)  #change ACM number as found from ls /dev/ttyUSB*

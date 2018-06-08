@@ -1,6 +1,8 @@
 import requests
 import json
 
+from config import config_data
+
 cnf_dat = config_data()
 
 # Get the feed
