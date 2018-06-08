@@ -9,11 +9,11 @@ SELECT  `id`, `status`, `status_code` FROM `device_status` WHERE 1
 function get_device_status($conn) {
 
 	$sql = "
-	SELECT devices.id, devices.title, devices.name , devices.port , device_categories.category,  device_status.status , device_status.status_code
+	SELECT devices.id, devices.title, devices.name , devices.port , device_categories.category,  devices.status AS device_stat, device_status.status , device_status.status_code
 	FROM devices
 	JOIN device_categories  ON devices.category_id = device_categories.id
 	JOIN device_status ON devices.status = device_status.id
-	WHERE 1  ";
+	WHERE 1 ORDER BY devices.id ";
 
 	$result = mysqli_query($conn, $sql);
 
