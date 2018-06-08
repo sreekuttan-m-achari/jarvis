@@ -44,12 +44,16 @@ while True:
 		print(device_status_json)
 		
 		ds = {}
+		i=0
 
 		for device in device_status:
-	 	   	ds[ device['port'] ] = device['status_code']
+	 	   	ds[ device['port'] ] =  device['status_code']
+	 	   	i+=1
 	 	   	#ser.write(ds.encode())
 
 	 	#ds="{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}" 
+
+	 	#{"sensor":"gps","time":1351824120,"data":[48.756080,2.302038]}
 
 	 	ds_json = json.dumps(ds);
 
