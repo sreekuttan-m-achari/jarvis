@@ -20,7 +20,7 @@ function get_device_status($conn) {
 	$devices = [];
 
 	if (!$result) {
-		die("Error description: " . mysqli_error($con));
+		die("Error description: ".mysqli_error($con));
 	} else if (mysqli_num_rows($result) > 0) {
 		// output data of each row
 		while ($row = mysqli_fetch_assoc($result)) {
@@ -30,5 +30,20 @@ function get_device_status($conn) {
 
 	mysqli_close($conn);
 	return $devices;
+
+}
+
+function set_device_status($conn, $device_id, $status) {
+
+	$sql = "UPDATE  devices SET status = $status  WHERE id = $device_id ";
+
+	$result = mysqli_query($conn, $sql);
+
+	if (!$result) {
+		die("Error description: ".mysqli_error($con));
+	}
+
+	mysqli_close($conn);
+	return $result;
 
 }
