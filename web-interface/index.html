@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<script src="assets/js/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		refresh_device_list();
+
+	    $("#refresh_device_list").click(function(){
+	        refresh_device_list();
+	        //location.reload();
+
+	    });
+
+	});
+
+
+	function set_device_status( device_id , status) {
+
+		/*http://192.168.43.163/data-api/devices.php?op=set_device_status&device_id=1&status=2*/
+
+		service_url = "https://us-central1-jarvis-auto-sys.cloudfunctions.net/set_device?op=set_device_status&device_id="+device_id+"&status="+status ;
+
+		$.get(service_url  , function(data, status){
+	            console.log ("Data: " + JSON.stringify(data )+ "\nStatus: " + status);
+	             location.reload();
+
+	    });
+
+
+	}
+
+	function refresh_device_list(){
+
+		$("#loader").show();
+		$("#devices > tbody").empty();
+
+		$.get("https://us-central1-jarvis-auto-sys.cloudfunctions.net/get_device_list", function(data, status){
+	            console.log ("Data: " + JSON.stringify(data )+ "\nStatus: " + status);
+
+	            var trHTML = '<tbody>';
+
+	            
+
+				$.each(data.data.devices, function (i, device) {
+				    trHTML += '<tr><td>' + device['name'] + '</td><td>' + device['port'] +'</td><td>' + device['category'] +'</td><td>' + device['status'] +'</td><td> <button onclick =   set_device_status( device_id , status)    class = "device_action" id="device_' + device['id'] + 'value="' + device['device_stat'] + '"> ' + device['status'] + ' </button> </td></tr>';
+				});
+
+				trHTML += '</tbody>' ;
+
+				$('#devices').append(trHTML);
+
+				$("#loader").hide();
+
+
+	        });
+	}
+
+
+	</script>
+</head>
+<body>
+
+<button id="refresh_device_list">Refresh Device List</button>
+
+<div id="loader" >LOADING...</div>
+
+<div class="device_list">
+
+<table id="devices" border='1'>
+    <thead>
+    	<tr>
+			<th>Name</th>
+			<th>Port</th>
+			<th>Category</th>
+	        <th>Status</th>
+			<th>Action</th>
+	    </tr>
+	</thead>
+
+</table>
+
+</div>
+</body>
+</html>
