@@ -48,6 +48,13 @@ exports.set_device = (req, res) => {
         data: req.body.value
     };
 
+
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    
+
     return datastore.save(entity)
         .then(() => res.status(200).send(`Entity ${key.path.join('/')} saved.`))
         .catch((err) => {
@@ -71,6 +78,13 @@ exports.set_device = (req, res) => {
  */
 exports.get_device = (req, res) => {
     const key = getKeyFromRequestData(req.body);
+
+
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    
 
     return datastore.get(key)
         .then(([entity]) => {
@@ -103,6 +117,11 @@ exports.get_device = (req, res) => {
  */
 exports.del = (req, res) => {
     const key = getKeyFromRequestData(req.body);
+    
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 
     // Deletes the entity
     // The delete operation will not fail for a non-existent entity, it just
@@ -130,8 +149,13 @@ exports.web_hook = (req, res) => {
 exports.get_device_list = (req, res) => {
 
     var kind = 'Device' ;
-    
+
     const query = datastore.createQuery(kind).order('name');
+
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 
     datastore.runQuery(query)
         .then(([entity]) => {
@@ -147,7 +171,7 @@ exports.get_device_list = (req, res) => {
                             "devices": entity 
                         }
                     };
-
+            
             res.type('application/json'); // => 'application/json'
             res.status(200).send(JSON.stringify(resp));
 
