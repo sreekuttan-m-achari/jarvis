@@ -118,7 +118,7 @@ exports.del = (req, res) => {
 
 exports.web_hook = (req, res) => {
 
-    var resp = { "fulfillmentText": "This is a text response" };
+    var resp = { "fulfillmentText": "Sorry ! The Device API is still under development.. Please check after sometime" };
 
     console.log(req.body.message);
 
@@ -129,36 +129,33 @@ exports.web_hook = (req, res) => {
 
 exports.get_device_list = (req, res) => {
 
-    var resp = {
-        "status": 1,
-        "data": {
-            "devices": [{
-                    "id": "1",
-                    "title": "Switch 001",
-                    "name": "switch001",
-                    "port": "8",
-                    "category": "SWITCH",
-                    "device_stat": "2",
-                    "status": "On",
-                    "status_code": "LOW"
-                },
-                {
-                    "id": "2",
-                    "title": "Switch 002",
-                    "name": "switch002",
-                    "port": "9",
-                    "category": "SWITCH",
-                    "device_stat": "2",
-                    "status": "On",
-                    "status_code": "LOW"
-                }
-            ]
-        }
-    };
+    var kind = 'Device' ;
+    
+    const query = datastore.createQuery(kind).order('name');
 
-    //console.log(req.body.message);
+    datastore.runQuery(query)
+        .then(([entity]) => {
+            // The get operation will not fail for a non-existent entity, it just
+            // returns an empty dictionary.
+            if (!entity) {
+                throw new Error(`No devices found.`);
+            }
 
-    res.type('application/json'); // => 'application/json'
-    res.status(200).send(JSON.stringify(resp));
+            var resp = {
+                        "status": 1,
+                        "data": {
+                            "devices": entity 
+                        }
+                    };
+
+            res.type('application/json'); // => 'application/json'
+            res.status(200).send(JSON.stringify(resp));
+
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send(err.message);
+            return Promise.reject(err);
+        });  
 
 };
