@@ -1,0 +1,17 @@
+
+gcloud functions deploy get_device   --trigger-http
+
+gcloud functions deploy set_device   --trigger-http
+
+gcloud functions deploy get_device_list --trigger-http
+
+gcloud functions deploy web_hook --trigger-http
+
+
+
+
+
+
+gcloud functions call set --data '{"kind":"Device","key":"device001","value":{"category": "SWITCH", "status": "On", "name": "switch001", "title": "Switch 001", "status_code": "HIGH", "id": "1", "device_stat": "1", "port": "8"} }'
+
+gcloud functions call set --data '{"kind":"Device","key":"device002","value":{"category": "SWITCH", "status": "Off", "name": "switch002", "title": "Switch 002", "status_code": "LOW", "id": "2", "device_stat": "2", "port": "9"} }'
