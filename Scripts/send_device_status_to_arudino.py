@@ -13,7 +13,7 @@ ser.baudrate=9600
 def get_device_status():
   	print("Calling Device API")
 	# Get the feed
-	r = requests.get(cnf_dat["api_endpoint"]+"/devices.php")
+	r = requests.get(cnf_dat["api_endpoint"])
 	r.text
 
 	# Convert it to a Python dictionary

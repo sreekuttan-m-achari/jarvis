@@ -6,7 +6,7 @@ from config import config_data
 cnf_dat = config_data()
 
 # Get the feed
-r = requests.get(cnf_dat["api_endpoint"]+"/devices.php")
+r = requests.get(cnf_dat["api_endpoint"])
 r.text
 
 # Convert it to a Python dictionary
