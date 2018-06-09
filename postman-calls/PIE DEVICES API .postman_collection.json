@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "418ba4c1-593f-4b59-8285-4d1264b27fc4",
+		"name": "PIE DEVICES API ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Devices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://192.168.43.163/data-api/devices.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"163"
+					],
+					"path": [
+						"data-api",
+						"devices.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Device Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://192.168.43.163/data-api/devices.php?op=set_device_status&device_id=1&status=2",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"43",
+						"163"
+					],
+					"path": [
+						"data-api",
+						"devices.php"
+					],
+					"query": [
+						{
+							"key": "op",
+							"value": "set_device_status"
+						},
+						{
+							"key": "device_id",
+							"value": "1"
+						},
+						{
+							"key": "status",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCP Get Devices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://us-central1-jarvis-auto-sys.cloudfunctions.net/get_device_list",
+					"protocol": "https",
+					"host": [
+						"us-central1-jarvis-auto-sys",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"get_device_list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCP Web Hook",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://us-central1-jarvis-auto-sys.cloudfunctions.net/web_hook",
+					"protocol": "https",
+					"host": [
+						"us-central1-jarvis-auto-sys",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"web_hook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCP Set Devices",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"kind\":\"Device\",\"key\":\"device001\",\n\t\"value\":{\n\t\t\"category\": \"SWITCH\", \n\t\t\"status\": \"On\", \n\t\t\"name\": \"switch001\", \n\t\t\"title\": \"Switch 001\", \n\t\t\"status_code\": \"HIGH\", \n\t\t\"id\": \"1\", \n\t\t\"device_stat\": \"1\", \n\t\t\"port\": \"8\"\n\t} \n}"
+				},
+				"url": {
+					"raw": "https://us-central1-jarvis-auto-sys.cloudfunctions.net/set_device",
+					"protocol": "https",
+					"host": [
+						"us-central1-jarvis-auto-sys",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"set_device"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GCP Get Device Status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"kind\":\"Device\",\n\t\"key\":\"device001\"\n}"
+				},
+				"url": {
+					"raw": "https://us-central1-jarvis-auto-sys.cloudfunctions.net/get_device",
+					"protocol": "https",
+					"host": [
+						"us-central1-jarvis-auto-sys",
+						"cloudfunctions",
+						"net"
+					],
+					"path": [
+						"get_device"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
