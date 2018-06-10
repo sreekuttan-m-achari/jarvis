@@ -8,6 +8,7 @@
 module.exports = {
 	process_intend : function (req, res) {
 
-    var resp = { "fulfillmentText": "Sorry ! The Device API is still under development.. Please check after sometime" };
-    return resp ;
+	    var resp = { "fulfillmentText": "Sorry ! The Device API is still under development.. Please check after sometime" };
+	    return resp ;
+	}
 };
