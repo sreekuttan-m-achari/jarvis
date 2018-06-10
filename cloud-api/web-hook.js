@@ -1,13 +1,13 @@
+'use strict';
 
-var http = require('http');
+//const Datastore = require('@google-cloud/datastore');
 
-http.createServer(function(req, res) {
+// Instantiates a client
+//const datastore = Datastore();
 
-    var resp = { "fulfillmentText": "This is a text response" };
+module.exports = {
+	process_intend : function (req, res) {
 
-    //console.log(req.body.message);
-
-    res.type('application/json'); // => 'application/json'
-    res.status(200).send(JSON.stringify(resp));
-
-}).listen(8080);
+    var resp = { "fulfillmentText": "Sorry ! The Device API is still under development.. Please check after sometime" };
+    return resp ;
+};

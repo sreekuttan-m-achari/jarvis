@@ -5,6 +5,8 @@ const Datastore = require('@google-cloud/datastore');
 // Instantiates a client
 const datastore = Datastore();
 
+const webhook =  require('./web-hook') ; 
+
 function getKeyFromRequestData(requestData) {
 
     var kind = "Device" ;
@@ -137,7 +139,9 @@ exports.del = (req, res) => {
 
 exports.web_hook = (req, res) => {
 
-    var resp = { "fulfillmentText": "Sorry ! The Device API is still under development.. Please check after sometime" };
+    //var resp = { "fulfillmentText": "Sorry ! The Device API is still under development.. Please check after sometime" };
+
+    var resp = webhook.process_intend(req, res) ;
 
     console.log(req.body.message);
 

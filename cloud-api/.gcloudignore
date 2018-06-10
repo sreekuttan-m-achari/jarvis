@@ -16,5 +16,4 @@
 node_modules
 
 get-device-list.js
-web-hook.js
 gcloud-cli-function-calls.txt
