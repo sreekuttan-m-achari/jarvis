@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html ng-app="HomeAutomationApp">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/datepicker.css" />
+  </head>
+
+  <body>
+  
+    
+      <div class="container">
+
+      <!-- <button class="btn btn-xs btn-danger" name="buttonClick" onclick="exitFromApp()">EXIT</button> -->
+
+
+        <link href="css/estilos.css" rel="stylesheet"/>
+        <link href="css/custom.css" rel="stylesheet"/>
+
+        <div class="menuBar" style="display: none;" >
+            <div id="mobile-nav" ></div>
+            <nav>
+              <ul class="menu">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#/device">Devices</a></li>
+                <li><a href="#/account">Account</a></li>
+                <li><a href="#/settings">Settings</a></li>
+                <li><a href="#/login">Logout</a></li>
+                <li><a href="#" onclick="exitFromApp();return false;" >EXIT</a></li>
+              </ul>
+            </nav>
+                
+        </div>
+        <div ng-view></div>
+
+         
+
+      </div>
+
+<footer class="footer">
+
+Maximprof Automation LLC. &copy; 2017 
+
+</footer>
+
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="scripts/mostrar_nav.js"></script>
+
+    <script type="text/javascript" src="scripts/angular.js"></script>
+    <script type="text/javascript" src="scripts/angular-route.js"></script>
+    <script type="text/javascript" src="scripts/fileUpload.js"></script>
+
+    <script type="text/javascript" src="scripts/app.js"></script>
+
+    <script type="text/javascript" src="services/httpHelper.service.js"></script>
+    <script type="text/javascript" src="services/app_config.service.js"></script>
+    <script type="text/javascript" src="scripts/PushNotification.js"></script>
+
+    <script src="modules/authentication/services.js"></script>
+    <script src="modules/authentication/controllers.js"></script>
+    <script src="modules/home/controllers.js"></script>
+    
+    <script src="modules/account/controllers.js"></script>
+
+    <script src="modules/device/services.js"></script>
+    <script src="modules/device/controllers.js"></script>
+
+    <script src="modules/settings/controllers.js"></script>
+
+    
+
+    <script type="text/javascript">
+
+     function exitFromApp()
+         {
+            navigator.app.exitApp();
+         }
+
+    </script>
+
+  </body>
+
+</html>

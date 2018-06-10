@@ -1,0 +1,62 @@
+<div class="row">
+	<div class="col-xs-12">
+	
+	<div class="screen-title">
+	</br></br>
+	<h4> DEVICES </h4>
+	<hr>
+		<div style="clear: both">
+			<a class="btn btn-sm btn-default add-device-btn pull-left" href="javascript:;" ng-click='add()'> Add Device</a>
+			<a class="btn btn-sm btn-info back-btn pull-right" href="javascript:;" ng-click='back()'> < Back</a>
+		</div>
+	</div>
+
+	<div style="clear: both; padding-top: 10px" >
+
+	<h5 > Device List </h5>
+
+	</div>
+
+	<div class="deviceList" class="ng-hide" >
+
+	<table class="table table-responsive table-bordered">
+	<thead>
+		<tr >  <th> # </th>  <th> Device </th> <th> Status </th> <th>Action</th> </tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="device in deviceList">  
+			<td> {{device.id}}  </td>  <td> {{device.name}} </td>  
+
+			<td>
+			  
+				<input class="btn btn-xs " type="button" id="btnOn{{device.id}}"  value="On" ng-class="{ 'btn-warning' : device.status == 'on' , ' btn-default disabled ' : device.status == 'off'  }"    ng-click="onDevice(device.id)"> 
+				
+				
+				<input class="btn btn-xs "  type="button" id="btnOff{{device.id}}"  value="Off" ng-class="{ 'btn-danger' : device.status == 'off' , 'btn-default disabled' : device.status == 'on' }"   ng-click="offDevice(device.id)"> 
+				
+			<td align="center">
+				<a class="btn btn-info btn-xs " href="javascript:;" ng-click="goToDeviceDetails(device.id);"> View </a> 
+			</td> 
+		</tr>
+		
+	</tbody>
+	</table>
+
+	</div>
+
+	 <div class="ng-hide notFoundMsg">
+        No devices found.
+    </div>
+	
+		
+	</div>
+</div>
+
+<div class="loaderImgDiv col-xs-12"  id="loaderDiv"  >
+	<center>
+	    <img style="width: 80px" src="images/loading.gif" alt="Loading..">
+    </center>
+
+
+</div>
+

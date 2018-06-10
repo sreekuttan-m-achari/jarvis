@@ -1,0 +1,39 @@
+
+</br></br></br>
+<div class="col-xs-offset-2 col-xs-8">
+<center>
+<h4>
+<img align="center" src="images/icon.png" style="" class="img img-responsive">
+</br>
+LOGIN 
+</br></br>
+</h4>
+</center>
+<div ng-show="error" class="alert alert-danger">{{error}}</div>
+<form name="form" ng-submit="login()" role="form">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <i class="fa fa-key"></i>
+        <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
+        <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <i class="fa fa-lock"></i>
+        <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
+        <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+    </div>
+    </br>
+    <div class="form-actions">
+        <button style="width: 80%; margin-left: 10%" type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-warning">Login</button>
+        
+</form>
+
+</div>
+<div class="row">
+
+</br></br></br></br></br></br>
+<center>
+<a href="#" onclick="exitFromApp();return false;" >Close Application</a>
+</center>
+</div>
