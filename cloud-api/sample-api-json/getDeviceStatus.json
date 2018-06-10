@@ -1,0 +1,30 @@
+{
+    "responseId": "9dc4047c-f68c-4d2c-a03c-91267e0fb559",
+    "queryResult": {
+        "queryText": "get the status of device 1",
+        "action": "get_device_status",
+        "parameters": {
+            "Device": "device",
+            "number": 1
+        },
+        "allRequiredParamsPresent": true,
+        "fulfillmentMessages": [{
+            "text": {
+                "text": [
+                    ""
+                ]
+            }
+        }],
+        "intent": {
+            "name": "projects/jarvis-auto-sys/agent/intents/56cc76e4-1b39-4d3d-bad3-c05716d340bb",
+            "displayName": "Get_Device_Status"
+        },
+        "intentDetectionConfidence": 1,
+        "diagnosticInfo": {},
+        "languageCode": "en"
+    },
+    "originalDetectIntentRequest": {
+        "payload": {}
+    },
+    "session": "projects/jarvis-auto-sys/agent/sessions/6ddcbc4b-61cc-f225-bc14-ef14c2b6df46"
+}

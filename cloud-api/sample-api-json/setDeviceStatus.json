@@ -1,0 +1,31 @@
+{
+    "responseId": "2247471a-2bdf-4723-9bc1-2e5a0b2c6847",
+    "queryResult": {
+        "queryText": "turn device 2 off",
+        "action": "set_device_status",
+        "parameters": {
+            "Status": "OFF",
+            "number": 2,
+            "Device": "device"
+        },
+        "allRequiredParamsPresent": true,
+        "fulfillmentMessages": [{
+            "text": {
+                "text": [
+                    ""
+                ]
+            }
+        }],
+        "intent": {
+            "name": "projects/jarvis-auto-sys/agent/intents/2bcd4408-4b46-4dee-a9a9-b779e1aeff5d",
+            "displayName": "Set_Device_Status"
+        },
+        "intentDetectionConfidence": 0.96,
+        "diagnosticInfo": {},
+        "languageCode": "en"
+    },
+    "originalDetectIntentRequest": {
+        "payload": {}
+    },
+    "session": "projects/jarvis-auto-sys/agent/sessions/6ddcbc4b-61cc-f225-bc14-ef14c2b6df46"
+}
