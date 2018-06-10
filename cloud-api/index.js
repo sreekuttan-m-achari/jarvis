@@ -5,11 +5,11 @@ const Datastore = require('@google-cloud/datastore');
 // Instantiates a client
 const datastore = Datastore();
 
-const webhook =  require('./web-hook') ; 
+const webhook = require('./web-hook');
 
 function getKeyFromRequestData(requestData) {
 
-    var kind = "Device" ;
+    var kind = "Device";
 
     if (!requestData.key) {
         throw new Error('Key not provided. Make sure you have a "key" property in your request');
@@ -55,7 +55,7 @@ exports.set_device = (req, res) => {
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    
+
 
     return datastore.save(entity)
         .then(() => res.status(200).send(`Entity ${key.path.join('/')} saved.`))
@@ -86,7 +86,7 @@ exports.get_device = (req, res) => {
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    
+
 
     return datastore.get(key)
         .then(([entity]) => {
@@ -119,7 +119,7 @@ exports.get_device = (req, res) => {
  */
 exports.del = (req, res) => {
     const key = getKeyFromRequestData(req.body);
-    
+
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Headers", "Origin,Content-Type, Authorization, x-id, Content-Length, X-Requested-With");
@@ -141,7 +141,7 @@ exports.web_hook = (req, res) => {
 
     //var resp = { "fulfillmentText": "Sorry ! The Device API is still under development.. Please check after sometime" };
 
-    var resp = webhook.process_intend(req, res) ;
+    var resp = webhook.process_intent(req, res);
 
     console.log(req.body.message);
 
@@ -152,7 +152,7 @@ exports.web_hook = (req, res) => {
 
 exports.get_device_list = (req, res) => {
 
-    var kind = 'Device' ;
+    var kind = 'Device';
 
     const query = datastore.createQuery(kind).order('name');
 
@@ -170,12 +170,12 @@ exports.get_device_list = (req, res) => {
             }
 
             var resp = {
-                        "status": 1,
-                        "data": {
-                            "devices": entity 
-                        }
-                    };
-            
+                "status": 1,
+                "data": {
+                    "devices": entity
+                }
+            };
+
             res.type('application/json'); // => 'application/json'
             res.status(200).send(JSON.stringify(resp));
 
@@ -184,6 +184,6 @@ exports.get_device_list = (req, res) => {
             console.error(err);
             res.status(500).send(err.message);
             return Promise.reject(err);
-        });  
+        });
 
 };
