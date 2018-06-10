@@ -57,7 +57,7 @@ module.exports = {
             case 'set_device_status':
 
                 device_id = device_id + queryResult.parameters.number;
-                var device_status = queryResult.parameters.status;
+                var device_status = queryResult.parameters.Status;
 
                 this.set_device_status(res, device_id, device_status);
 
@@ -174,13 +174,48 @@ module.exports = {
                     throw new Error(`No entity found for key ${key.path.join('/')}.`);
                 }
 
-                fft = fft + entity.name + " is " + entity.status;
+                /* '{"category":"SWITCH","port":"8","status_code":"LOW","status":"On","name":"Switch
+  001"}' */
 
-                var resp = { "fulfillmentText": fft };
+                if (device_status == "ON") {
+                    entity.status = 'On';
+                    entity.status_code = 'LOW';
+                }
 
-                res.type('application/json'); // => 'application/json'
-                res.status(200).send(JSON.stringify(resp));
-                return resp;
+                if (device_status == "OFF") {
+                    entity.status = 'Off';
+                    entity.status_code = 'HIGH';
+                }
+
+                const deviceSet = {
+                    key: key,
+                    data: entity
+                };
+
+
+                return datastore.save(deviceSet)
+                    .then(() => {
+
+                            fft = fft + entity.name + " is turned " + entity.status;
+
+                            var resp = { "fulfillmentText": fft };
+
+                            res.type('application/json'); // => 'application/json'
+                            res.status(200).send(JSON.stringify(resp));
+                            return resp;
+
+                        }
+
+
+                    )
+                    .catch((err) => {
+                        console.error(err);
+                        res.status(500).send(err.message);
+                        return Promise.reject(err);
+                    });
+
+
+
 
             })
             .catch((err) => {
