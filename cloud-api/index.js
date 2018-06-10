@@ -139,15 +139,17 @@ exports.del = (req, res) => {
 
 exports.web_hook = (req, res) => {
 
-    //var resp = { "fulfillmentText": "Sorry ! The Device API is still under development.. Please check after sometime" };
-
-    var resp = webhook.process_intent(req, res);
-
-    console.log(req.body.message);
-
+    /*var resp = { "fulfillmentText": "Sorry ! The Device API is still under development.. Please check after sometime" };
+    console.log(resp);
     res.type('application/json'); // => 'application/json'
     res.status(200).send(JSON.stringify(resp));
+    */
+    console.log("Incoming Fulfillment Request");
+    console.log(req.body);
+    var resp = webhook.process_intent(req, res);
 
+    console.log("Intend Processor output : ");
+    console.log(resp);
 };
 
 exports.get_device_list = (req, res) => {
