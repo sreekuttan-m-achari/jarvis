@@ -1,19 +1,25 @@
 #include <ArduinoJson.h>
 
-String device_status="";
-String sensor="";
-int relay1=8;
-int relay2=9;
+String device_status=""; 
+
+const int relay[] = { 2, 3 , 4, 5, 6, 7, 8, 9, 10, 12 };
+const int relayCount = sizeof(relay);           // the number of pins (i.e. the length of the array)
+
 
 //DynamicJsonBuffer jsonBuffer;
 //StaticJsonBuffer<200> jsonBuffer;
 
 void setup() {
+
   // initialize digital pin LED_BUILTIN as an output.
-  pinMode(8, OUTPUT);
-  pinMode(9, OUTPUT);
-  // initialize digital pin LED_BUILTIN as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT); 
+
+
+  for (int thisPin = 0; thisPin < relayCount; thisPin++) {
+    pinMode(relay[thisPin], OUTPUT);
+    digitalWrite(relay[thisPin], HIGH);
+  }
+ 
   // start serial port at 9600 bps:
   Serial.begin(9600);
   while (!Serial) {
@@ -22,11 +28,7 @@ void setup() {
     delay(100);                       // wait for a second
     digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
     delay(100);
-  }
-
-  digitalWrite(relay1, HIGH);
-  digitalWrite(relay2, HIGH);
-  
+  }  
   establishContact();  // send a byte to establish contact until receiver responds
 }
 
@@ -51,30 +53,25 @@ void loop() {
     digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
     delay(1000);                       // wait for a second
 
-    const char* relay_status1 = root[String(relay1)] ;
-    const char* relay_status2 = root[String(relay2)] ;
+
+    String msg = "DEVICE STATUS : \n ";
+
+
+    for (int thisPin = 0; thisPin < relayCount; thisPin++) {
+
+      char* relay_status = root[String(relay[thisPin])] ;
+      
+      if(String(relay_status) == "HIGH"){
+        digitalWrite(relay[thisPin], HIGH);
+        msg +=  " Relay " + String(thisPin) + ": Off \n ";
+      }
+      if(String(relay_status) == "LOW"){
+        digitalWrite(relay[thisPin], LOW);
+        msg +=  " Relay " + String(thisPin) + ": On \n ";
+      }
+          
+    }
     
-    //Serial.println(relay1_status);
-    //Serial.println(relay2_status);
-
-    String msg = "MSG : RCVD ( RLY1 " + String(relay_status1) + " , RLY2 " + String (relay_status2) + " )";
-
-    if(String(relay_status1) == "HIGH"){
-         digitalWrite(relay1, HIGH);
-         msg +=  " Relay 1 : High ";
-    }
-    if(String(relay_status1) == "LOW"){
-       digitalWrite(relay1, LOW);
-       msg +=  " Relay 1 : LOW ";
-    }
-    if(String(relay_status2) == "HIGH"){ 
-       digitalWrite(relay2, HIGH);
-       msg +=  " Relay 2 : HIGH ";
-    }
-    if(String(relay_status2) == "LOW"){
-       digitalWrite(relay2, LOW);
-       msg +=  " Relay 2 : LOW ";
-    }
     Serial.println(msg);   // check status
     digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
     delay(1000);
