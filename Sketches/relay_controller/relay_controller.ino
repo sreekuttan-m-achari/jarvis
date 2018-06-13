@@ -3,7 +3,7 @@
 String device_status=""; 
 
 const int relay[] = { 2, 3 , 4, 5, 6, 7, 8, 9, 10, 12 };
-const int relayCount = sizeof(relay);           // the number of pins (i.e. the length of the array)
+const int relayCount = sizeof(relay);           // the number of relays (i.e. the length of the array)
 
 
 //DynamicJsonBuffer jsonBuffer;
@@ -54,8 +54,7 @@ void loop() {
     delay(1000);                       // wait for a second
 
 
-    String msg = "DEVICE STATUS : \n ";
-
+    String msg = "DEVICE STATUS : {  ";
 
     for (int thisPin = 0; thisPin < relayCount; thisPin++) {
 
@@ -63,15 +62,17 @@ void loop() {
       
       if(String(relay_status) == "HIGH"){
         digitalWrite(relay[thisPin], HIGH);
-        msg +=  " Relay " + String(thisPin) + ": Off \n ";
+        msg +=  " Relay " + String(thisPin) + ": Off , ";
       }
       if(String(relay_status) == "LOW"){
         digitalWrite(relay[thisPin], LOW);
-        msg +=  " Relay " + String(thisPin) + ": On \n ";
+        msg +=  " Relay " + String(thisPin) + ": On , ";
       }
           
     }
-    
+
+    msg +=  " } " ;
+     
     Serial.println(msg);   // check status
     digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
     delay(1000);
